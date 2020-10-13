@@ -40,6 +40,11 @@ public class MyLinkedList<k> {
 			this.head.setNext(temp);
 		}
 	}
+	public INode<k> pop(){
+		INode<k> tempNode =this.head;
+		this.head=head.getNext();
+		return tempNode;
+	}
 
 	public void printMyNodes() {
 		INode<k> node = this.head;
@@ -60,6 +65,9 @@ public class MyLinkedList<k> {
 		list.append(node1);
 		list.append(node3);
 		list.insert(node1, node2);
+		list.printMyNodes();
+		System.out.println("\nPopped element: " + list.pop().getKey());
+		System.out.println("\nList after popping:\n");
 		list.printMyNodes();
 	}
 }
