@@ -9,8 +9,13 @@ public class MyLinkedList<k> {
 		this.head = null;
 		this.tail = null;
 	}
+	public void insert(INode<k> myNode,INode<k> newNode) {
+		INode<k> tempNode=myNode.getNext();
+		myNode.setNext(newNode);
+		newNode.setNext(tempNode);
+	}
 
-	public void add(INode<k> newNode) {
+	public void append(INode<k> newNode) {
 		if (this.head == null) {
 			this.head = newNode;
 		}
@@ -18,10 +23,22 @@ public class MyLinkedList<k> {
 			this.tail = newNode;
 		} else {
 			this.tail.setNext(newNode);
-			//this.tail=newNode;
-			this.tail = this.tail.getNext();
+			this.tail = newNode;
+
 		}
 
+	}
+	public void add(INode<k> newNode) {
+		if (this.head == null) {
+			this.head = newNode;
+		}
+		if (this.tail == null) {
+			this.tail = newNode;
+		} else {
+			INode<k> temp = this.head;
+			this.head = newNode;
+			this.head.setNext(temp);
+		}
 	}
 
 	public void printMyNodes() {
@@ -38,11 +55,11 @@ public class MyLinkedList<k> {
 	public static void main(String[] args) {
 		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 		MyNode<Integer> node3 = new MyNode<Integer>(70);
-		list.add(node3);
 		MyNode<Integer> node2 = new MyNode<Integer>(30);
-		list.add(node2);
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
-		list.add(node1);
+		list.append(node1);
+		list.append(node3);
+		list.insert(node1, node2);
 		list.printMyNodes();
 	}
 }
