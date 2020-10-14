@@ -1,6 +1,6 @@
 package com.capgemini.linkedlist;
 
-public class MyLinkedList<k> {
+public class MyLinkedList<k extends Comparable<k>> {
 	public INode<k> head;
 	public INode<k> tail;
 	private int size;
@@ -8,8 +8,9 @@ public class MyLinkedList<k> {
 	public MyLinkedList() {
 		this.head = null;
 		this.tail = null;
-		this.size=0;
+		this.size = 0;
 	}
+
 	public int size() {
 		return size;
 	}
@@ -110,6 +111,7 @@ public class MyLinkedList<k> {
 			size++;
 		}
 	}
+
 	public void deleteNode(k value) {
 		INode<k> node = this.head;
 		if (node == this.tail && node != null) {
@@ -134,6 +136,25 @@ public class MyLinkedList<k> {
 		}
 	}
 
+	public void printSorted(INode<k> newNode) {
+		INode<k> tempNode;
+
+		if (head == null || ((Comparable) head.getKey()).compareTo(newNode.getKey()) >= 0) {
+			newNode.setNext(head);
+			head = newNode;
+		} else {
+			tempNode = head;
+			while ((tempNode.getNext() != null
+					&& ((Comparable) tempNode.getNext().getKey()).compareTo(newNode.getKey()) < 0)) {
+				tempNode = tempNode.getNext();
+				newNode.setNext(tempNode.getNext());
+				tempNode.setNext(newNode);
+			}
+			size++;
+		}
+
+	}
+
 	public static void main(String[] args) {
 		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 		MyNode<Integer> node3 = new MyNode<Integer>(70);
@@ -146,10 +167,11 @@ public class MyLinkedList<k> {
 		System.out.println("\nPopped element: " + list.popLast().getKey());
 		System.out.println("\nList after popping:\n");
 		list.printMyNodes();
+		list.printSorted(node1);
 	}
 }
 
-interface INode<k> {
+interface INode<k extends Comparable<k>> {
 	k getKey();
 
 	void setKey(k key);
@@ -159,7 +181,7 @@ interface INode<k> {
 	void setNext(INode<k> next);
 }
 
-class MyNode<k> implements INode<k> {
+class MyNode<k extends Comparable<k>> implements INode<k> {
 	private k key;
 	private MyNode<k> next;
 

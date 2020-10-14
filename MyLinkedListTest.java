@@ -33,7 +33,7 @@ public class MyLinkedListTest {
 		Assert.assertTrue(result);
 	}
 	@Test
-	public void onDeletingGivenValue_WhenSearched_ShouldReturnTrue_AndListSizeReducedByOne() {
+	public void onDeletingGivenValue_WhenSearched_ShouldReturnFalse_AndListSizeReducedByOne() {
 		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 		MyNode<Integer> node1 = new MyNode<Integer>(56);
 		MyNode<Integer> node2 = new MyNode<Integer>(30);
@@ -52,6 +52,30 @@ public class MyLinkedListTest {
 		list.printMyNodes();
 		boolean result = (list.search(40)==false) || sizeAfterDeletion==sizeBeforeDeletion-1;
 		Assert.assertTrue(result);
+	}
+	@Test
+	public void given3Numbers_WhenUsingSortPrint_ShouldBeAddedInSortedManner() {
+		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
+		MyNode<Integer> node1 = new MyNode<Integer>(56);
+		MyNode<Integer> node2 = new MyNode<Integer>(30);
+		MyNode<Integer> node3 = new MyNode<Integer>(40);
+		MyNode<Integer> node4= new MyNode<Integer>(70);
+		list.printSorted(node1);
+		list.printSorted(node2);
+		list.printSorted(node3);
+		list.printSorted(node4);
+		list.printMyNodes();
+		System.out.print("Sorted Nodes :");
+		MyNode<Integer> node=(MyNode<Integer>) list.head;
+		boolean result= node==node2;
+		node=node.getNext();
+		result=result && node==node3;
+		node=node.getNext();
+		result=result && node==node1;
+		node=node.getNext();
+		result=result && node==node4;
+		Assert.assertTrue(result);
+
 	}
 
 }
