@@ -77,6 +77,23 @@ public class MyLinkedList<k> {
 		}
 
 	}
+	public void insertAfter(k value, INode<k> newNode) {
+		INode<k> node = this.head;
+		while (node != null) {
+			if (node.getKey().equals(value)) {
+				break;
+			}
+			newNode=node.getNext();
+		}
+		if (node != null) {
+			INode<k> temp = node.getNext();
+			node.setNext(newNode);
+			node.getNext().setNext(temp);
+			if (node == this.tail) {
+				this.tail = newNode;
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
