@@ -56,6 +56,16 @@ public class MyLinkedList<k> {
 		return tempNode;
 		
 	}
+	public boolean search(k value){
+		INode<k> node=this.head;
+		while(node!=null) {
+			if(node.getKey().equals(value)) {
+				return true;
+			}
+			node=node.getNext();
+		}
+		return false;
+	}
 
 	public void printMyNodes() {
 		INode<k> node = this.head;
