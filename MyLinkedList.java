@@ -45,6 +45,17 @@ public class MyLinkedList<k> {
 		this.head=head.getNext();
 		return tempNode;
 	}
+	public INode<k> popLast(){
+		INode<k> tempNode=this.head;
+		while(!tempNode.getNext().equals(tail)) {
+			tempNode=tempNode.getNext();
+		}
+		this.tail=tempNode;
+		tempNode=tempNode.getNext();
+		this.tail.setNext(null);
+		return tempNode;
+		
+	}
 
 	public void printMyNodes() {
 		INode<k> node = this.head;
@@ -66,7 +77,7 @@ public class MyLinkedList<k> {
 		list.append(node3);
 		list.insert(node1, node2);
 		list.printMyNodes();
-		System.out.println("\nPopped element: " + list.pop().getKey());
+		System.out.println("\nPopped element: " + list.popLast().getKey());
 		System.out.println("\nList after popping:\n");
 		list.printMyNodes();
 	}
